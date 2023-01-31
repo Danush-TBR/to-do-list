@@ -6,7 +6,7 @@ export default class Header extends Component {
     render() { 
         return (
             <header>
-                <div className='my-header'> My<div className = "my-heading"> TO-DO </div>List</div>
+                <div className='my-header'> MY<div className = "my-heading"> TO-DO </div>LIST</div>
             </header>
         );
     }

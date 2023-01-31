@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import editIcon from '../static files/edit pencil icon.png'
 class Content extends Component {
     state = {
         currentTodo : '',
@@ -29,7 +29,7 @@ class Content extends Component {
     }
     editTask = (task) =>{
         console.log("Hello");
-        this.setState({isInEditingState:true,editTaskId : task.id});
+        this.setState({isInEditingState:true,editTaskId : task.id,currentTodo : task.task});
     }
     changeTask = (index) =>{
         let {allTodos} = this.state;
@@ -43,20 +43,18 @@ class Content extends Component {
     displayTasks = () =>{
         let myTasks = [];
         const {allTodos} = this.state;
-        console.log(this.state);
+        // console.log(this.state);
         for(let index = 0;index<allTodos.length;index++){
             myTasks.push(
             
-            <li key={index}>{allTodos[index].id!==this.state.editTaskId?allTodos[index].task:null}
+            <li key={index}>{allTodos[index].id!==this.state.editTaskId?allTodos[index].task:
+                <form>
+                    <input id="my-button" type="text" onChange={this.inputHandler} placeholder="Enter the task" defaultValue={allTodos[index].task}/>
+                    <button type="submit" onClick={() =>this.changeTask(index)}>+</button>
+                </form>
+            }
 
-            {!this.state.isInEditingState?<button onClick={() => this.editTask(allTodos[index])}>Edit</button>:null}
-
-            {allTodos[index].id===this.state.editTaskId?
-                    <form>
-                        <input id="my-button" type="text" onChange={this.inputHandler} placeholder="Enter the task" defaultValue={allTodos[index].task}/>
-                        <button type="submit" onClick={() =>this.changeTask(index)}>+</button>
-                    </form>
-            :null}
+            {!this.state.isInEditingState?<button id='editButton' onClick={() => this.editTask(allTodos[index])}>Edit</button>:null}
 
             <button onClick={() =>this.deleteTask(allTodos[index].id)}>Delete</button>
 
@@ -68,11 +66,15 @@ class Content extends Component {
     render() {
         return (
             <div className="main-content">
-                <form>
-                    <input id="my-button" type="text" onChange={this.inputHandler} placeholder="Enter the task"/>
-                    <button type="submit" onClick={this.addtask}>+</button>
-                </form>
-                {this.displayTasks()}
+                <div className="input-box">
+                    <form>
+                        <input id="my-button" type="text" onChange={this.inputHandler} placeholder="Enter the task"/>
+                        <button type="submit" onClick={this.addtask}>+</button>
+                    </form>
+                </div>
+                <div className="display-tasks">
+                    {this.displayTasks()}
+                </div>
             </div>
         );
     }
