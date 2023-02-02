@@ -7,11 +7,13 @@ class App extends Component {
     render() { 
         return (
             <React.Fragment>
-            <Header/>
-            <div class = "bodyContent">
-                <div className="addTaskHeader">Add a new task.</div>
-                <Content/>
-            </div>
+                <Header/>
+                <div className = "bodyContent">
+                    <div className="addTaskHeader">
+                        Add a new task.
+                    </div>
+                    <Content/>
+                </div>
             </React.Fragment>
         );
     }
